@@ -3,11 +3,14 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const heartBtns = document.getElementsByClassName('like-glyph')
+const modal = document.getElementById('modal')
+modal.classList.add('hidden')
 
 document.addEventListener("DOMContentLoaded", () => {
-  const heartBtns = document.getElementsByClassName('like-glyph')
-  const modal = document.getElementById('modal')
-  modal.classList.add('hidden')
+  // const heartBtns = document.getElementsByClassName('like-glyph')
+  // const modal = document.getElementById('modal')
+  // modal.classList.add('hidden')
 
   for (const like of heartBtns) {
 
@@ -16,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (heart.innerText === EMPTY_HEART) {  
         mimicServerCall() //acts like fetch()
           .then(() => {
-              heart.className += '.activated-heart'
+              heart.className += ' activated-heart'
+                //addition assignment operator (+=) adds a value to a variable
+                //To add a class to an element, without overwriting existing values, insert a space and the new class name: .className += " anotherClass"
               heart.innerText = `${FULL_HEART}`
           })
           .catch(error => {
@@ -28,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 5000) //1000 ms = 1 second
           })
       } else {
-        heart.className -= '.activated-heart'
+        heart.className -= ' activated-heart'
         heart.innerText = `${EMPTY_HEART}`
       }
     }) //END of addEventListener

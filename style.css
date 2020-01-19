@@ -57,9 +57,12 @@ article.media-post > footer ul {
   margin-bottom: 0;
 }
 
+/* like-glyph.activated-heart  */
 .activated-heart {
   color: red;
 }
+
+
 
 .hidden {
   visibility: hidden;
