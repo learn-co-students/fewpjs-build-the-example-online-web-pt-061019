@@ -4,7 +4,30 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+// But this only works for the first glyph
+// const likeGlyph = document.querySelector('.like-glyph');
 
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("The DOM has loaded")
+
+  document.addEventListener("click", (event) => {
+    console.log("A like has been clicked!")
+    // console.log(event.target.innerText)
+
+    if (event.target.innerHTML == EMPTY_HEART) {
+      console.log("SAD")
+      mimicServerCall();
+    } else if (event.target.innerHTML == FULL_HEART) {
+      console.log("Happy" )
+    }
+
+  })
+
+})
+
+function like() {
+  mimicServerCall();
+}
 
 
 //------------------------------------------------------------------------------
