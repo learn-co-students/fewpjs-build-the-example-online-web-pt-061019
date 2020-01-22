@@ -5,34 +5,51 @@ const FULL_HEART = '♥'
 // Your JavaScript code goes here!
 document.addEventListener("DOMContentLoaded", () => {
  
-  let heart = document.getElementsByClassName(".like-glyph")
-  let h = document.getElementsByClassName(".hidden")
+  let hearts = document.querySelectorAll(".like-glyph")
+  // let h = document.querySelector(".hidden")
   
   
-  addEventListener("click", function(e){
-    if (e.innerText == EMPTY_HEART){
-      e.target.className = "activated-heart"
-      e.innerText = FULL_HEART
-    }
-    else if (e.innerText == FULL_HEART){
-      e.target.className = "like-glyph"
-      e.innerText = EMPTY_HEART
-    }
+  hearts.forEach(function(heart){
+    heart.addEventListener("click", callBackFunc)
+  })
     
-    mimicServerCall()
-    .then(function(object) {
-      like.classList.add("activated-heart")
-      console.log(object);
-    })
-    .catch(function(error) {
-     
-     
-      h.removeAttribute("hidden")
-     
-      setTimeout(function() {
-        console.log(error.message);
-      }, 5000);
-    });
+    // if (e.innerText == EMPTY_HEART){
+    //   e.target.className = "activated-heart"
+    //   e.innerText = FULL_HEART
+    // }
+    // else if (e.innerText == FULL_HEART){
+    //   e.target.className = "like-glyph"
+    //   e.innerText = EMPTY_HEART
+    // }
+    function callBackFunc(e){
+     console.log("click", e.target)
+      mimicServerCall()
+      .then(function(object) {
+        if (e.target.innerText == EMPTY_HEART){
+          e.target.className = "activated-heart"
+          e.target.innerText = FULL_HEART
+        }
+        
+      })
+      .catch(function(error) {
+        if (e.target.innerText == FULL_HEART){
+          e.target.className = "like-glyph"
+          e.target.innerText = EMPTY_HEART
+        }
+       
+        let el = document.querySelector('#modal');
+        if (el.classList.contains("hidden")) {
+          el.classList.remove("hidden");
+          let p = document.getElementById("modal-message")
+          p.innerText = error
+        }
+        setTimeout(function() {
+          el.classList.add("hidden");
+        }, 5000);
+      });
+
+    }
+
   })
 
 
@@ -53,5 +70,5 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
   });
 }
 
-})
+
 
