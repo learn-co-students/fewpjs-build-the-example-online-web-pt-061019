@@ -7,37 +7,36 @@ const modalMessage = document.getElementById("modal-message")
 const hidden = document.getElementById("modal")
 hidden.className = "hidden"
 
-const like = document.querySelector(".like")
+const likes = document.getElementsByClassName("like")
 
 function heart(){
-  //if empty change likeglyph inner text to full heart and add class .activated heart
-  //if activated change .activatedheart to likeglyph and innertext to empty heart
-  let heart = like.firstElementChild
-  mimicServerCall("url")
-  .then(function(resolve){
-    if (heart.innerText = EMPTY_HEART){
-      heart.className = "activated-heart"
-      heart.innerText = FULL_HEART
-      modalMessage.innerText = resolve.message
-    }
-    else if (heart.innerText = FULL_HEART) {
-      heart.className = "like-glyph"
-      heart.innerText = EMPTY_HEART
-      modalMessage.innerText = resolve.message
-    }
-  })
-  
-  .catch(function(reject){
-      //append error message to p tag inner text
-      //change hidden class name to visible
-      //set timeout 5 seconds
-    setTimeout(function(){
-      hidden.className = "visible"
-      modalMessage = reject.message
-    }, 5000)
-  })
+  let hearts = document.getElementsByClassName("like-glyph")
+  for(heart of hearts){
+    heart.addEventListener('click', function(event){
+      mimicServerCall("url")
+      .then(function(){
+        if (event.target.innerText === EMPTY_HEART){
+        event.target.className = "activated-heart"
+        event.target.innerText = FULL_HEART
+        console.log(heart)
+        }
+        else if (event.target.innerText === FULL_HEART) {
+        event.target.className = "like-glyph"
+        event.target.innerText = EMPTY_HEART
+        }
+      })
+
+      .catch(function(error){
+        setTimeout(function(){
+        hidden.className = "visible"
+        modalMessage.innerText = error.message
+        }, 5000)
+    })
+  }) 
+  }
 }
-like.addEventListener('click', function(){
+
+document.addEventListener("DOMContentLoaded", function(){
   heart()
 })
 
