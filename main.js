@@ -5,11 +5,21 @@ const FULL_HEART = '♥'
 // Your JavaScript code goes here!
 document.addEventListener("DOMContentLoaded", () => {
  
-  let like = document.getElementsByClassName("like")
-  let h = document.getElementsByClassName("hidden")
-  like.addEventListener("click", function(e){
-    like.classList.remove("activated-heart")
-    object = mimicServerCall()
+  let heart = document.getElementsByClassName(".like-glyph")
+  let h = document.getElementsByClassName(".hidden")
+  
+  
+  addEventListener("click", function(e){
+    if (e.innerText == EMPTY_HEART){
+      e.target.className = "activated-heart"
+      e.innerText = FULL_HEART
+    }
+    else if (e.innerText == FULL_HEART){
+      e.target.className = "like-glyph"
+      e.innerText = EMPTY_HEART
+    }
+    
+    mimicServerCall()
     .then(function(object) {
       like.classList.add("activated-heart")
       console.log(object);
