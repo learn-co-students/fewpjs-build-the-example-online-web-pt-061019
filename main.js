@@ -3,8 +3,27 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
-
-
+document.addEventListener("DOMContentLoaded", () => {
+ 
+  let like = document.getElementsByClassName("like")
+  let h = document.getElementsByClassName("hidden")
+  like.addEventListener("click", function(e){
+    like.classList.remove("activated-heart")
+    object = mimicServerCall()
+    .then(function(object) {
+      like.classList.add("activated-heart")
+      console.log(object);
+    })
+    .catch(function(error) {
+     
+     
+      h.removeAttribute("hidden")
+     
+      setTimeout(function() {
+        console.log(error.message);
+      }, 5000);
+    });
+  })
 
 
 //------------------------------------------------------------------------------
@@ -23,3 +42,6 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
     }, 300);
   });
 }
+
+})
+
