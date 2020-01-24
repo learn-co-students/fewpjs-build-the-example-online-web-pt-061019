@@ -52,7 +52,7 @@ function addLikeListener() {
         })
       } else if (event.target.innerHTML == FULL_HEART) {
         // console.log("Happy" )
-        updateModel(e);
+        updateHeart(e);
       }
     })
   }
@@ -62,11 +62,13 @@ function updateHeart(e) {
   // console.log(e.target.innerHTML);
   if (e.target.innerHTML == FULL_HEART) {
     e.target.innerHTML = EMPTY_HEART;
+    e.target.classList.remove("activated-heart");
   } else if (e.target.innerHTML == EMPTY_HEART) {
     e.target.innerHTML = FULL_HEART;
+    e.target.classList.add("activated-heart");
   }
 
-  e.target.classList.add("activated-heart");
+
 }
 
 const model = document.querySelector('#modal')
