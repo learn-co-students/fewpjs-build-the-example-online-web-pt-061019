@@ -11,26 +11,8 @@ const likeGlyph = document.getElementsByClassName('like-glyph');
 
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("The DOM has loaded")
-  //
-  // console.log(likeGlyph)
 
   addLikeListener();
-
-
-
-  // document.addEventListener("click", (event) => {
-  //   console.log("A like has been clicked!")
-  //   // console.log(event.target.innerText)
-  //
-  //   if (event.target.innerHTML == EMPTY_HEART) {
-  //     // console.log("SAD")
-  //     mimicServerCall();
-  //   } else if (event.target.innerHTML == FULL_HEART) {
-  //     // console.log("Happy" )
-  //   }
-  //
-  // })
-
 })
 
 function addLikeListener() {
@@ -74,7 +56,6 @@ function updateHeart(e) {
 const model = document.querySelector('#modal')
 
 function updateModel() {
-
 
   if (model.classList == "hidden") {
     model.classList.remove("hidden");
